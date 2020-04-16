@@ -2,10 +2,9 @@ const userService = require("./user.service"),
   httpStatusCodes = require("http-status-codes");
 
 const userController = {
-  register: async (req, res) => {
+  registerAdmin: async (req, res) => {
     try {
-      console.log(req);
-      const registeredUser = await userService.register(req.body);
+      const registeredUser = await userService.registerAdmin(req.body);
       return res.status(httpStatusCodes.OK).json(registeredUser);
     } catch (err) {
       return res.status(httpStatusCodes.BAD_REQUEST).json({

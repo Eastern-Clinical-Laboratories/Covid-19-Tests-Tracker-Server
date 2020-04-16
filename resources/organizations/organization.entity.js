@@ -1,15 +1,11 @@
 const mongoose = require("mongoose");
 
-const userEntity = new mongoose.Schema({
+const organizationEntity = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
   email: {
-    type: String,
-    required: true,
-  },
-  password: {
     type: String,
     required: true,
   },
@@ -36,21 +32,8 @@ const userEntity = new mongoose.Schema({
     type: String,
     enum: ["Active", "InActive"],
     default: "Active",
-  },
-  Signature: {
-    data: Buffer,
-    contentType: String,
-  },
-  salt: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    required: true,
-    default: "lab-user",
-  },
+  }
 });
 
-const user = mongoose.model("users", userEntity);
-module.exports = user;
+const organization = mongoose.model("organizations", organizationEntity);
+module.exports = organization;

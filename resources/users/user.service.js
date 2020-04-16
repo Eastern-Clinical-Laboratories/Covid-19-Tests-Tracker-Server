@@ -1,12 +1,11 @@
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
-const crypto = require('crypto');
+const crypto = require("crypto");
 const users = require("./user.entity");
 
 const userService = {
-  register: async function (registerBody) {
-    console.log(registerBody);
-    const { name, email, password, password2 } = registerBody;
+  registerAdmin: async function (adminBody) {
+    const { name, email, password, password2 } = adminBody;
     if (!name || !email || !password || !password2) {
       throw new Error("Fill all the details");
     }
@@ -23,19 +22,18 @@ const userService = {
 
     const salt = crypto.randomBytes(32);
     const passwordHashed = await argon2.hash(password, { salt });
+    const role = adminBody.role || "lab-admin";
 
     const createdUser = await users.create({
       name: name,
       email: email,
       password: passwordHashed,
       salt: salt,
+      role: role,
     });
-
     return {
-      user: {
-        name: createdUser.name,
-        email: createdUser.email,
-      },
+      name: createdUser.name,
+      email: createdUser.email,
     };
   },
   userExists: async (name) => {

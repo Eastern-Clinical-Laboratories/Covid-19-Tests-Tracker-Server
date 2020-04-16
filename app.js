@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
 const express = require("express");
+const cors = require('cors');
 
 const app = express();
 
 const userRoute = require("./resources/users/user.route");
+const adminRoute = require('./resources/admins/admin.route');
 const citizenRoute = require("./resources/citizens/citizen.route");
 
-const isAuth = require("./middlewares/auth.middleware");
+const admin = require('./middlewares/admin.middleware');
+const authorize = require("./middlewares/auth.middleware");
 const currentUer = require("./middlewares/currentuser.middleware");
 
 const db = require("./config/config").mongoUri;
@@ -16,14 +19,13 @@ mongoose
   .then(() => console.log("db connected"))
   .catch((err) => console.log(err));
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// app.use(isAuth);
-// app.use(currentUer);
-
 app.use("/api/users/v1", userRoute);
-app.use("/api/citizens/v1", [isAuth, currentUer], citizenRoute);
+app.use('/api/admins/v1', [authorize, admin], adminRoute);
+app.use("/api/citizens/v1", [authorize, currentUer], citizenRoute);
 
 const PORT = process.env.PORT || 5000;
 

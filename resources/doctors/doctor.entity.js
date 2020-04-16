@@ -1,15 +1,11 @@
 const mongoose = require("mongoose");
 
-const userEntity = new mongoose.Schema({
+const doctorEntity = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
   email: {
-    type: String,
-    required: true,
-  },
-  password: {
     type: String,
     required: true,
   },
@@ -37,20 +33,7 @@ const userEntity = new mongoose.Schema({
     enum: ["Active", "InActive"],
     default: "Active",
   },
-  Signature: {
-    data: Buffer,
-    contentType: String,
-  },
-  salt: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    required: true,
-    default: "lab-user",
-  },
 });
 
-const user = mongoose.model("users", userEntity);
-module.exports = user;
+const doctor = mongoose.model("doctors", doctorEntity);
+module.exports = doctor;
