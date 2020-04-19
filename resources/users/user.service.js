@@ -65,6 +65,7 @@ const userService = {
       user: {
         email: userRecord.email,
         name: userRecord.name,
+        role: userRecord.role
       },
       token: generateToken(userRecord),
     };
