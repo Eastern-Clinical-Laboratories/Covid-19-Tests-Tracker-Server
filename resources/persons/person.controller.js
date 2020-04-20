@@ -15,6 +15,19 @@ const personController = {
       });
     }
   },
+  readPersonSamples: async (req, res) =>{
+    try {
+      const personSamples = await personService.readPersonSamples(
+        req.params.personId,
+        req.currentUser
+      );
+      return res.status(httpStatusCodes.OK).json(personSamples);
+    } catch (err) {
+      return res.status(httpStatusCodes.BAD_REQUEST).json({
+        error: err.message,
+      });
+    }
+  },
   readPersons: async (req, res) => {
     try {
       const registeredPersons = await personService.readPersons(

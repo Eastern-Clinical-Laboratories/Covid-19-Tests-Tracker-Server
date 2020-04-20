@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const mapper = require("object-mapper");
 const persons = require("./person.entity");
 const personProfile = require("./person.profile");
@@ -31,6 +32,16 @@ const personService = {
   readPersons: async (currentUser) => {
     const createdPersons = await persons.find({ labId: currentUser._id });
     return createdPersons;
+  },
+
+  readPersonSamples: async (personId, currentUser) => {
+    const createdPersons = await persons
+      .findOne({
+        $and: [{ labId: currentUser._id }, { _id: personId }],
+      })
+      .populate("samples");
+    if(createdPersons){return createdPersons.samples;}
+    return null;
   },
 
   searchPerson: async (currentUser, keyword) => {

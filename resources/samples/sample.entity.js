@@ -2,11 +2,13 @@ const mongoose = require("mongoose");
 const sampleEntity = new mongoose.Schema({
   test: {
     type: String,
+    enum: ["rapid", "pcr"],
+    default: "rapid",
   },
   priority: {
     type: String,
-    enum: ["High", "Medium", "Low"],
-    default: "Medium",
+    enum: ["high", "medium", "low"],
+    default: "medium",
   },
   collectionDateTime: {
     type: String,
@@ -19,13 +21,14 @@ const sampleEntity = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["Awaiting Collection", "Test Pending", "Tested"],
-    default: "Awaiting Collection",
+    enum: ["awaitingcollection", "testpending", "tested"],
+    default: "awaitingcollection",
   },
-  sampleType:{
-    type:String,
-    enum: ["ThroatSwab", "Blood", "Serum", "Plasma"]
-  }
+  sampleType: {
+    type: String,
+    enum: ["throatswab", "blood", "serum", "plasma"],
+    default: 'blood'
+  },
 });
 
 const samples = mongoose.model("samples", sampleEntity);

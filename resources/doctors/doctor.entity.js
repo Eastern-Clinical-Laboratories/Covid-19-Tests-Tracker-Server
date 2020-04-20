@@ -30,8 +30,8 @@ const doctorEntity = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["Active", "InActive"],
-    default: "Active",
+    enum: ["active", "inactive"],
+    default: "active",
   },
 });
 

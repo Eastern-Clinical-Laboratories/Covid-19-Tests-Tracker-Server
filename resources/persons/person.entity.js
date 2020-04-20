@@ -15,7 +15,9 @@ const personEntity = new mongoose.Schema({
   area: { type: String },
   referral: { type: String, require: true },
   fileNumber: { type: String },
-  samples: [{ type: String, require: true }],
+  samples: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "samples", require: true },
+  ],
   miscellaneousInformation: {
     hasHistoryOfForeignTravel: { type: Boolean },
     travelledCountry: { type: String },

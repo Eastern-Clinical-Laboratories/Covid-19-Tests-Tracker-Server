@@ -12,6 +12,16 @@ const samplesController = {
       });
     }
   },
+  getSampleById: async(req, res) =>{
+    try {
+      const sample = await sampleService.getSampleById(req.params.sampleId);
+      return res.status(httpStatusCodes.OK).json(sample);
+    } catch (err) {
+      return res.status(httpStatusCodes.BAD_REQUEST).json({
+        error: err.message,
+      });
+    }
+  }
 };
 
 

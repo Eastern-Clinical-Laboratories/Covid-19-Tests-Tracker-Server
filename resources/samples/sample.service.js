@@ -8,8 +8,6 @@ const sampleService = {
       sampleRequests,
       sampleProfile.sampleListDtoToEntity
     );
-
-    console.log("started to samples person");
     const createdSamples = await samples.insertMany(sampleRequestEntities);
     return createdSamples;
   },
@@ -32,6 +30,9 @@ const sampleService = {
       priority: updateSampleRequest.priority,
     });
   },
+  getSampleById: async(sampleId) => {
+    return await samples.findById(sampleId);
+  }
 };
 
 module.exports = sampleService;
