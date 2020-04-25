@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const sampleEntity = new mongoose.Schema({
   test: {
     type: String,
-    enum: ["rapid", "pcr"],
-    default: "rapid",
+    enum: ["COVID_19_ANTIBODY_RAPID_SCREENING_TEST", "COVID_19_DETECTION_BY_PCR"],
+    default: "COVID_19_ANTIBODY_RAPID_SCREENING_TEST",
   },
   priority: {
     type: String,
